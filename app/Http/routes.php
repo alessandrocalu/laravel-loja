@@ -14,8 +14,12 @@
 Route::get('/', 'LojaAdminController@index');
 
 
-Route::get('/', 'LojaAdminController@index');
-Route::get('items', 'LojaAdminController@index');
+Route::get('/', 'LojaAdminController@home');
+
+Route::get('items', ['as' => 'items.index', 'uses' => 'LojaAdminController@index']);
+Route::get('items/create', ['as' => 'items.create', 'uses' => 'LojaAdminController@create']);
+Route::post('items/store', ['as' => 'items.store', 'uses' => 'LojaAdminController@store']);
+
 Route::get('suppliers', 'LojaAdminController@index');
 Route::get('locations', 'LojaAdminController@index');
 
