@@ -11,16 +11,15 @@
 |
 */
 
-Route::get('/', 'LojaAdminController@index');
+Route::get('/', 'HomeController@home')->middleware('auth');
+Route::get('admin', 'HomeController@admin')->middleware('auth');
 
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-Route::get('/', 'LojaAdminController@home');
-
-Route::get('items', ['as' => 'items.index', 'uses' => 'LojaAdminController@index']);
-Route::get('items/create', ['as' => 'items.create', 'uses' => 'LojaAdminController@create']);
-Route::post('items/store', ['as' => 'items.store', 'uses' => 'LojaAdminController@store']);
-
-Route::get('suppliers', 'LojaAdminController@index');
-Route::get('locations', 'LojaAdminController@index');
-
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 

@@ -54,10 +54,24 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'forge'),
+            'host'      => env('DB_HOST', '127.0.0.1'),
+            'port'      => env('DB_PORT', '3307'),
+            'database'  => env('DB_DATABASE', 'meta'),
             'username'  => env('DB_USERNAME', 'root'),
-            'password'  => env('DB_PASSWORD', ''),
+            'password'  => env('DB_PASSWORD', '12345@@'),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
+        'mysql2' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_HOST', 'sql212.epizy.com'),
+            'port'      => env('DB_PORT', '3306'),
+            'database'  => env('DB_DATABASE', 'epiz_29575323_meta'),
+            'username'  => env('DB_USERNAME', 'epiz_29575323'),
+            'password'  => env('DB_PASSWORD', 'CEGm7LTOQrZT'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
