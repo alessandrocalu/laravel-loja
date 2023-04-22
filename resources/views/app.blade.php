@@ -48,6 +48,9 @@
                     @if (! Auth::guest() && Auth::user()->type == 'admin')
                         <li><a href="{{ url('/admin') }}">Participantes</a></li>
                     @endif
+                    @if (! Auth::guest() && (Auth::user()->type == 'voluntario' || Auth::user()->type == 'admin'))
+                        <li><a href="{{ url('/alunos') }}">Alunos</a></li>
+                    @endif
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::guest())

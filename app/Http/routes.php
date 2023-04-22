@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@home')->middleware('auth');
 Route::get('admin', 'HomeController@admin')->middleware('auth');
+Route::get('alunos', 'HomeController@alunos')->middleware('auth');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

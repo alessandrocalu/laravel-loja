@@ -23,6 +23,12 @@ class HomeController extends Controller
     }
 
     //
+    public function alunos(){
+        $listUsers = $this->users->where('type', 'aluno')->paginate(5);
+        return view('admin.users.aluno', compact('listUsers')); 
+    }
+
+    //
     public function home(){
         $user = Auth::user();
         

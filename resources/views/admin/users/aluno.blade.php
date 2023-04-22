@@ -6,8 +6,8 @@
     <!-- Page Header -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Participantes
-                <small>Listagem de Participantes</small>
+            <h1 class="page-header">Alunos
+                <small>Listagem de Alunos</small>
             </h1>
         </div>
     </div>
@@ -15,9 +15,6 @@
 
     <table class="table">
         <tr>
-            <th>
-               Tipo
-            </th>
             <th>
                Matricula
             </th>
@@ -40,9 +37,6 @@
 
         @foreach( $listUsers as $user)
             <tr>
-                <td>
-                    {{ $user->type }}
-                </td>
                 <td>
                     {{ $user->matricula }}
                 </td>
