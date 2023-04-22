@@ -36,6 +36,20 @@
 						</div>
 
 						<div class="form-group">
+							<label class="col-md-4 control-label">Whatsapp number</label>
+							<div class="col-md-6">
+								<input type="whatsapp" class="form-control" name="whatsapp" value="{{ old('whatsapp') }}" requerid>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Birth date</label>
+							<div class="col-md-6">
+								<input type="date" class="form-control" name="data_nascimento" value="{{ old('data_nascimento') }}" requerid>
+							</div>
+						</div>
+
+						<div class="form-group">
 							<label class="col-md-4 control-label">Password</label>
 							<div class="col-md-6">
 								<input type="password" class="form-control" name="password" requerid>

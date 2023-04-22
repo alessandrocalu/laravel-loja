@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\User;
+
 
 class HomeController extends Controller
 {
@@ -17,13 +19,14 @@ class HomeController extends Controller
     //
     public function admin(){
         $listUsers = $this->users->paginate(5);
-        return view('admin.users.index', compact('listUsers'));
+        return view('admin.users.index', compact('listUsers')); 
     }
 
     //
     public function home(){
-        //$listUser = $this->users->all();
-        $points = random_int(100, 500);
+        $user = Auth::user();
+        
+        $points = $user->points;
         return view('home', compact('points'));
     }
 }

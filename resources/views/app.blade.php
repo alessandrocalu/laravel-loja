@@ -45,7 +45,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="{{ url('/admin') }}">Participantes</a></li>
+                    @if (! Auth::guest() && Auth::user()->type == 'admin')
+                        <li><a href="{{ url('/admin') }}">Participantes</a></li>
+                    @endif
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::guest())
