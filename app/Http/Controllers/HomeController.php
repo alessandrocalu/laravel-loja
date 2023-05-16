@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     //
     public function admin(){
-        $listUsers = $this->users->paginate(5);
+        $listUsers = $this->users->where('type', '!=', 'aluno')->paginate(5);
         return view('admin.users.index', compact('listUsers')); 
     }
 
