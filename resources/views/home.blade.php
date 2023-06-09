@@ -8,7 +8,8 @@
 				<div class="panel-heading">Bem vindo!</div>
 
 				<div class="panel-body">
-					Seu saldo em moedas é: {{$points}}
+					<h3>Seu saldo em moedas é: {{$points}}</h3>
+					{{ date('Y-m-d H:i:s') }}
 				</div>
 			</div>
 		</div>
