@@ -4,25 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
-
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-
     protected $redirectPath = '/';
     protected $loginPath = '/auth/login';
 
@@ -69,13 +59,89 @@ class AuthController extends Controller
         ]);
     }
 
-    //
-    public function login(){
+    private function validateLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ]);
+    }
+
+    private function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            'email' => [trans('auth.failed')],
+        ]);
+    }
+
+    private function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        return redirect()->intended($this->redirectPath);
+    }
+
+    private function credentials(Request $request)
+    {
+        return $request->only('email', 'password');
+    }
+
+    private function attemptLogin(Request $request)
+    {
+        return $this->guard()->attempt(
+            $this->credentials($request), $request->boolean('remember')
+        );
+    }
+    
+    public function login(Request $request){
+        $this->validateLogin($request);
+
+        if ($this->attemptLogin($request)) {
+            if ($request->hasSession()) {
+                $request->session()->put('auth.password_confirmed_at', time());
+            }
+
+            return $this->sendLoginResponse($request);
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    public function getRegister() {
+        return view('auth.register');
+    }
+
+    public function getLogin() {
         return view('auth.login');
     }
 
-    //
-    public function register(){
-        return view('auth.register');
+    public function getLogout(Request $request) {
+        $this->guard()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+
+    public function postLogin(Request $request) {
+        $this->login($request);
+        $request->session()->regenerate();
+
+        return redirect()->intended($this->redirectPath);
+    }
+
+    public function postRegister(Request $request) {
+        $validator = $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return redirect($this->redirectPath);
+    }
+
+    private function guard()
+    {
+        return Auth::guard();
     }
 }

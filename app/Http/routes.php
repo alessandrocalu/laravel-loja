@@ -14,6 +14,10 @@
 Route::get('/', 'HomeController@home')->middleware('auth');
 Route::get('admin', 'HomeController@admin')->middleware('auth');
 Route::get('alunos', 'HomeController@alunos')->middleware('auth');
+Route::get('points/plus/{id}', 'HomeController@addPoints')->middleware('auth');
+Route::get('points/minus/{id}', 'HomeController@removePoints')->middleware('auth');
+Route::post('points/plus', ['as' => 'points.plus', 'uses' => 'HomeController@storeAddPoints'])->middleware('auth');
+Route::post('points/minus', ['as' => 'points.minus', 'uses' => 'HomeController@storeRemovePoints'])->middleware('auth');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

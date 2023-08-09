@@ -24,42 +24,42 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">Nome</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="name" value="{{ old('name') }}" requerid>
+								<input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Email</label>
 							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}" requerid>
+								<input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Whatsapp/Celular</label>
 							<div class="col-md-6">
-								<input type="whatsapp" class="form-control" name="whatsapp" value="{{ old('whatsapp') }}" requerid>
+								<input type="whatsapp" class="form-control" name="whatsapp" value="{{ old('whatsapp') }}" required>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Data Nascimento</label>
 							<div class="col-md-6">
-								<input type="date" class="form-control" name="data_nascimento" value="{{ old('data_nascimento') }}" requerid>
+								<input type="date" class="form-control" name="data_nascimento" value="{{ old('data_nascimento') }}" required>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Senha</label>
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="password" requerid>
+								<input type="password" class="form-control" name="password" required>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Confirmar Senha</label>
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="password_confirmation" requerid>
+								<input type="password" class="form-control" name="password_confirmation" required>
 							</div>
 						</div>
 

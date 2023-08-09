@@ -33,6 +33,9 @@
             <th>
                 Moedas
             </th>
+            <th>
+                Ações
+            </th>
         </tr>
 
         @foreach( $listUsers as $user)
@@ -54,6 +57,10 @@
                 </td>
                 <td>
                     {{ $user->points  }}
+                </td>
+                <td>
+                    <a href="{{ url('/points/plus') }}/{{ $user->id }}">+ Honras</a><br>
+                    <a href="{{ url('/points/minus') }}/{{ $user->id }}">- Honras</a>
                 </td>
             </tr>
         @endforeach

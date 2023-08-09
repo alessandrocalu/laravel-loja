@@ -36,4 +36,9 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'type', 'remember_token'];
+
+    public function historyPoints()
+    {
+        return $this->hasMany('App\Points');
+    }
 }
