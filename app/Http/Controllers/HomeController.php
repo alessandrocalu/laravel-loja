@@ -18,12 +18,13 @@ class HomeController extends Controller
     }
 
     public function admin(){
-        $listUsers = $this->users->where('type', '!=', 'aluno')->paginate(5);
+        $listUsers = $this->users->where('type', '!=', 'aluno')->paginate(50);
         return view('admin.users.index', compact('listUsers')); 
     }
 
     public function alunos(){
-        $listUsers = $this->users->where('type', 'aluno')->paginate(5);
+        $order = request('order', 'matricula');
+        $listUsers = $this->users->where('type', 'aluno')->orderBy($order, 'ASC')->paginate(50);
         return view('admin.users.aluno', compact('listUsers')); 
     }
 

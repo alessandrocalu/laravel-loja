@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
@@ -52,14 +53,23 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">Senha</label>
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="password" required>
+								<img src="/resources/img/oio.png" id="olho" class="olho" title="ver texto">
+								<input type="password" id="pass" class="form-control" name="password" required>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Confirmar Senha</label>
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="password_confirmation" required>
+								<img src="/resources/img/oio.png" id="olho_confirmation" class="olho" title="ver texto">
+								<input type="password" id="pass_confirmation" class="form-control" name="password_confirmation" required>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label"></label>
+							<div class="col-md-6">
+								<div class="g-recaptcha" data-sitekey="6LfjcaYpAAAAACBo7Q7Sutjco7xzxTHsaD4E8xZu"></div>
 							</div>
 						</div>
 
@@ -76,4 +86,44 @@
 		</div>
 	</div>
 </div>
+
+
+<script>
+document.getElementById('olho').addEventListener('mousedown', function() {
+  document.getElementById('pass').type = 'text';
+});
+
+document.getElementById('olho').addEventListener('mouseup', function() {
+  document.getElementById('pass').type = 'password';
+});
+
+// Para que o password não fique exposto apos mover a imagem.
+document.getElementById('olho').addEventListener('mousemove', function() {
+  document.getElementById('pass').type = 'password';
+});
+
+
+document.getElementById('olho_confirmation').addEventListener('mousedown', function() {
+  document.getElementById('pass_confirmation').type = 'text';
+});
+
+document.getElementById('olho_confirmation').addEventListener('mouseup', function() {
+  document.getElementById('pass_confirmation').type = 'password';
+});
+
+// Para que o password não fique exposto apos mover a imagem.
+document.getElementById('olho_confirmation').addEventListener('mousemove', function() {
+  document.getElementById('pass_confirmation').type = 'password';
+});
+
+</script>
+
+<style>
+.olho {
+  cursor: pointer;
+  right: 25px;
+  position: absolute;
+  width: 30px;
+}
+</style>
 @endsection

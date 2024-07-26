@@ -31,7 +31,8 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">Senha</label>
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
+								<img src="/resources/img/oio.png" id="olho" class="olho" title="ver texto">
+								<input type="password" id="pass" class="form-control" name="password">
 							</div>
 						</div>
 
@@ -39,7 +40,7 @@
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">Login</button>
 
-								<!--<a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a> -->
+								<a class="btn btn-link" href="{{ url('auth/register') }}">Para registrar clique aqui...</a>
 							</div>
 						</div>
 					</form>
@@ -48,4 +49,28 @@
 		</div>
 	</div>
 </div>
+
+<script>
+document.getElementById('olho').addEventListener('mousedown', function() {
+  document.getElementById('pass').type = 'text';
+});
+
+document.getElementById('olho').addEventListener('mouseup', function() {
+  document.getElementById('pass').type = 'password';
+});
+
+// Para que o password não fique exposto apos mover a imagem.
+document.getElementById('olho').addEventListener('mousemove', function() {
+  document.getElementById('pass').type = 'password';
+});
+</script>
+
+<style>
+.olho {
+  cursor: pointer;
+  right: 25px;
+  position: absolute;
+  width: 30px;
+}
+</style>
 @endsection

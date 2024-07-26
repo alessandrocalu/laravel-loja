@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 
-
 class AuthController extends Controller
 {
     protected $redirectPath = '/';
@@ -70,7 +69,14 @@ class AuthController extends Controller
     private function sendFailedLoginResponse(Request $request)
     {
         throw ValidationException::withMessages([
-            'email' => [trans('auth.failed')],
+            'email' => [trans('auth.failed')]
+        ]);
+    }
+
+    private function sendFailedRegisterResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            'email' => [trans('Dados incompletos. Verifique preenchimento!')]
         ]);
     }
 
@@ -131,6 +137,26 @@ class AuthController extends Controller
     }
 
     public function postRegister(Request $request) {
+
+        global $_POST, $_SERVER;
+
+        $captcha = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : null;
+
+        if(! empty($captcha) ){
+            $res = json_decode(
+                file_get_contents(
+                    "https://www.google.com/recaptcha/api/siteverify?secret=6LfjcaYpAAAAAMM9JFVPDb9_YVl3Guj3-l5C8g_h&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']
+                )
+            );
+            if ( $res->success === true) {
+                //ok
+            } else {
+                return $this->sendFailedRegisterResponse($request);
+            }
+        } else {
+            return $this->sendFailedRegisterResponse($request);
+        }
+
         $validator = $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));

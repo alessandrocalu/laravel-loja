@@ -16,22 +16,22 @@
     <table class="table">
         <tr>
             <th>
-               Matricula
+                <a href="{{ url('/alunos?order=matricula') }}">Matrícula</a>
             </th>
             <th>
-               Nome
+                <a href="{{ url('/alunos?order=name') }}">Nome</a>
             </th>
             <th>
-                Email
+                <a href="{{ url('/alunos?order=email') }}">Email</a>
             </th>
             <th>
-                Whatsapp
+                <a href="{{ url('/alunos?order=whatsapp') }}">Whatsapp</a>
             </th>
             <th>
-                Nascimento
+                <a href="{{ url('/alunos?order=data_nascimento') }}">Nascimento</a>
             </th>
             <th>
-                Moedas
+                <a href="{{ url('/alunos?order=points') }}">Moedas</a>
             </th>
             <th>
                 Ações
