@@ -142,10 +142,12 @@ class AuthController extends Controller
 
         $captcha = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : null;
 
+        $secret = env('GOOGLE_CAPTCHA_SECRET', '?????');
+
         if(! empty($captcha) ){
             $res = json_decode(
                 file_get_contents(
-                    "https://www.google.com/recaptcha/api/siteverify?secret=6LfjcaYpAAAAAMM9JFVPDb9_YVl3Guj3-l5C8g_h&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']
+                    "https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']
                 )
             );
             if ( $res->success === true) {
